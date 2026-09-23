@@ -1,9 +1,9 @@
 /* === pi-web-hacker-theme:BEGIN === */
 /* ---------------------------------------------------------------------------
- * pi-web hacker / terminal theme  —  appended to the built CSS bundle
- * applied by:  ~/.pi-web-hacker/apply.sh
- * removed by:  ~/.pi-web-hacker/restore.sh
- * edit this file, then re-run apply.sh to see changes (hard-refresh browser)
+ * pi-web custom theme — greenscreen
+ * applied by:  ../apply.sh     (see ../README.md for usage and rollback)
+ * removed by:  ../restore.sh   (byte-exact, sha256 verified)
+ * edit this file, then run:  ../use.sh greenscreen
  * ------------------------------------------------------------------------- */
 
 /* ---------- 1. monospace everywhere -------------------------------------- */
