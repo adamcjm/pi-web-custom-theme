@@ -1,0 +1,99 @@
+/* === pi-web-hacker-theme:BEGIN === */
+/* ---------------------------------------------------------------------------
+ * pi-web hacker / terminal theme  —  appended to the built CSS bundle
+ * applied by:  ~/.pi-web-hacker/apply.sh
+ * removed by:  ~/.pi-web-hacker/restore.sh
+ * edit this file, then re-run apply.sh to see changes (hard-refresh browser)
+ * ------------------------------------------------------------------------- */
+
+/* ---------- 1. monospace everywhere -------------------------------------- */
+:root {
+  --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono", "Fira Code",
+               var(--font-noto-mono), ui-monospace, Menlo, monospace;
+  --font-sans: var(--font-mono);
+  --default-font-family: var(--font-mono);
+  --default-mono-font-family: var(--font-mono);
+}
+html, body, button, input, select, textarea, kbd, samp, pre, code, table {
+  font-family: var(--font-mono) !important;
+}
+/* math keeps its own typefaces: the rule above only targets form/terminal
+   elements, so KaTeX's own font-family declarations are left untouched. */
+
+/* ---------- 2. sharp corners & phosphor cursor --------------------------- */
+* { border-radius: 0 !important; }
+input, textarea { caret-color: var(--accent); }
+
+/* ---------- 3. CRT scanlines -------------------------------------------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.20) 0px, rgba(0, 0, 0, 0.20) 1px,
+    transparent 1px, transparent 3px
+  );
+}
+
+/* ---------- 4. selection & scrollbars ----------------------------------- */
+::selection { background: var(--accent) !important; color: var(--accent-contrast) !important; }
+* { scrollbar-color: var(--border) transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ---------- 5. palettes ------------------------------------------------- */
+/* light -> PHOSPHOR GREEN */
+html[data-theme="light"], [data-theme="light"] {
+  color-scheme: dark;
+  --bg:#08120e; --bg-panel:#0c1a14; --bg-hover:#11241b; --bg-selected:#163023;
+  --border:#2a5c47; --text:#7cffb2; --text-muted:#4fd88c; --text-dim:#3aa06a;
+  --accent:#39ff88; --accent-hover:#8cffb8; --accent-contrast:#03170d;
+  --user-bg:#0d2018; --assistant-bg:#08120e; --tool-bg:#0b1811;
+  --bg-subtle:rgba(57,255,136,.05);
+}
+
+/* dark -> MATRIX */
+html[data-theme="dark"], [data-theme="dark"] {
+  color-scheme: dark;
+  --bg:#020403; --bg-panel:#050b07; --bg-hover:#081410; --bg-selected:#0c1f16;
+  --border:#12452a; --text:#00ff41; --text-muted:#00c832; --text-dim:#0a9c2b;
+  --accent:#00ff41; --accent-hover:#6bff8f; --accent-contrast:#001601;
+  --user-bg:#061a0d; --assistant-bg:#020403; --tool-bg:#04100a;
+  --bg-subtle:rgba(0,255,65,.05);
+}
+
+/* mist -> CYBERDECK CYAN */
+html[data-theme="mist"], [data-theme="mist"] {
+  color-scheme: dark;
+  --bg:#001014; --bg-panel:#00191f; --bg-hover:#002530; --bg-selected:#003341;
+  --border:#0f6b7d; --text:#7ef9ff; --text-muted:#3fd6e6; --text-dim:#2496a8;
+  --accent:#00e5ff; --accent-hover:#8bf3ff; --accent-contrast:#001a1f;
+  --user-bg:#00222b; --assistant-bg:#001014; --tool-bg:#001820;
+  --bg-subtle:rgba(0,229,255,.05);
+}
+
+/* rose -> NEON MAGENTA */
+html[data-theme="rose"], [data-theme="rose"] {
+  color-scheme: dark;
+  --bg:#120016; --bg-panel:#1a0020; --bg-hover:#25002e; --bg-selected:#31003d;
+  --border:#6d1f86; --text:#ff9dff; --text-muted:#e86fe8; --text-dim:#b44bb4;
+  --accent:#ff5cf4; --accent-hover:#ffa6f8; --accent-contrast:#1a0018;
+  --user-bg:#22002a; --assistant-bg:#120016; --tool-bg:#190020;
+  --bg-subtle:rgba(255,92,244,.05);
+}
+
+/* pine -> AMBER CRT */
+html[data-theme="pine"], [data-theme="pine"] {
+  color-scheme: dark;
+  --bg:#140d00; --bg-panel:#1c1200; --bg-hover:#261900; --bg-selected:#332200;
+  --border:#7a5418; --text:#ffb000; --text-muted:#d18a00; --text-dim:#9c6500;
+  --accent:#ffb000; --accent-hover:#ffd066; --accent-contrast:#1c1200;
+  --user-bg:#241700; --assistant-bg:#140d00; --tool-bg:#1a1000;
+  --bg-subtle:rgba(255,176,0,.05);
+}
+/* === pi-web-hacker-theme:END === */

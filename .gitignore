@@ -1,0 +1,12 @@
+# local runtime state — never commit
+active
+
+# pristine pi-web files captured on first apply + their record
+backup/
+
+# editor / OS noise
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# --- pi-web launcher wrapper ----------------------------------------------------
+# Put this directory earlier in PATH than npm's shim and `pi-web` will
+# re-apply the active skin (idempotently) before handing over to the real
+# launcher. This is what makes the skin survive `npm install -g` upgrades.
+#
+# If anything here fails, pi-web still starts — only the skin is lost.
+set -u
+
+THEME_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# shellcheck source=lib.sh
+. "$THEME_DIR/lib.sh"
+
+if [ -f "$THEME_DIR/active" ]; then
+  theme="$(cat "$THEME_DIR/active" 2>/dev/null || true)"
+  skin="$THEME_DIR/$theme/skin.css"
+  if [ -f "$skin" ]; then
+    bash "$THEME_DIR/apply.sh" "$skin" >/dev/null 2>&1 \
+      || echo "pi-web: could not re-apply skin '$theme' (starting without it)" >&2
+  else
+    echo "pi-web: skin '$theme' not found; starting with the stock look" >&2
+  fi
+fi
+
+REAL="${PI_WEB_REAL:-}"
+if [ -z "$REAL" ]; then
+  pkg="$(ct_pkg_dir 2>/dev/null || true)"
+  [ -n "$pkg" ] && REAL="$(ct_real_launcher "$pkg" 2>/dev/null || true)"
+fi
+
+if [ -z "$REAL" ] || [ ! -f "$REAL" ]; then
+  echo "pi-web: cannot find the real launcher." >&2
+  echo "        install it with:  npm install -g @agegr/pi-web@latest" >&2
+  echo "        or set PI_WEB_REAL=/path/to/bin/pi-web.js" >&2
+  exit 1
+fi
+
+exec node "$REAL" "$@"
